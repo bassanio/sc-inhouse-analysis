@@ -1,4 +1,49 @@
-# sc-inhouse-analysis
+# The Impact of Ethnicity on the Single-cell Immune Response to Falciparum Malaria
+
+
+This repository conatins the information related to **The Impact of Ethnicity on the Single-cell Immune Response to Falciparum Malaria**.
+
+1. [Data Repository](#data-information)
+2. [Consortium Analysi](#consortium-analysis)
+3. [In house analysis](#in-house-analysis)
+4. Comparison between Consortium and inhouse
+
+
+### Data information
+
+The multiplexed 10x scRNA-seq using the 10x Genomics Chromium with Single Cell 3’ library was sequenced in 2 batches in Illumina NovaSeq 6000 instrument. The sequenced data is subsequently processed using cellranger (3.0.2) by aligning to the human transcriptome(GRCh38-1.2.0) for each pool
+
+```
+cellranger count \
+--id=Pool007-G7_cellrangerCount \
+--fastqs=. \
+--sample=Pool007-G7 \
+--transcriptome=refdata-cellranger-GRCh38-1.2.0 \
+--jobmode=local \
+--localcores=14 \
+```
+
+Cell ranger output per batch is available via Gene Expression Omnibus
+
+**Batch1:** [GSE273781](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE273781)
+
+**Batch2:** [GSE273785](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE273785)
+
+
+### Consortium Analysis
+
+**1) Genotype Quality Control and Phasing**
+Genotype data was initially quality-controlled by comparison to the 1000 Genomes Project to validate sex and ancestry matches, (refers the Fig1 in Analysis_Report_Feb_16_2021.pdf). Phasing of the genotype data was performed using Eagle, and imputation was carried out with Minimac4. The resulting phased and imputed genotype data was used for de-multiplexing samples and identification of doublet within each pool.
+
+**2) Demultiplexing and Doublet Removal**
+Demultiplexing and doublet identification were conducted using multiple tools, including Demuxlet and Scrublet. The initial dataset comprised 33,694 genes across 196,881 cells, derived from 2 batches and 32 pools. Droplet-type assignment and associated confidence scores for each cell were computed and reported in output_all_Pools_Asignment.txt for all the different softwares used. Highly confident singlets (167,026 cells) were selected for downstream analysis using an intersectional method as outlined in pipeline (results Final_all_Pools_Asignment.txt).
+
+
+**3) Cell Type Identification**
+Cell type identification was performed using two independent methods: Azimuth (reference-based method within the Seurat framework) and scPred. The results from both methods were merged and compared and are summarized in Comparison.zip.
+
+
+### In house analysis 
 
 Following bioinformatics method was utilized for the analysis of pooled 10x single cellsamples generated across multiple pools and multiple runs.
 
