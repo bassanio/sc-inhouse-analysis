@@ -8,6 +8,7 @@ This repository conatins the information related to **The Impact of Ethnicity on
 3. [In house analysis](#in-house-analysis)
 4. Comparison between Consortium and inhouse
 
+---
 
 ### Data information
 
@@ -30,18 +31,21 @@ Cell ranger output per batch is available via Gene Expression Omnibus
 **Batch2:** [GSE273785](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE273785)
 
 
+---
+
+
 ### Consortium Analysis
 
 **1) Genotype Quality Control and Phasing**
-Genotype data was initially quality-controlled by comparison to the 1000 Genomes Project to validate sex and ancestry matches, (refers the Fig1 in Analysis_Report_Feb_16_2021.pdf). Phasing of the genotype data was performed using Eagle, and imputation was carried out with Minimac4. The resulting phased and imputed genotype data was used for de-multiplexing samples and identification of doublet within each pool.
+Genotype data was initially quality-controlled by comparison to the 1000 Genomes Project to validate sex and ancestry matches, (refers the Fig1 in Analysis_Report_Feb_16_2021.pdf). Phasing of the genotype data was performed using Eagle, and imputation was carried out with Minimac4. The resulting phased and imputed genotype data was used for de-multiplexing samples and identification of doublet within each pool. Detailed information on the pipeline and scripts is defined [here](https://wg1-pipeline-qc.readthedocs.io/en/latest/Imputation/index.html#imputation).
 
 **2) Demultiplexing and Doublet Removal**
-Demultiplexing and doublet identification were conducted using multiple tools, including Demuxlet and Scrublet. The initial dataset comprised 33,694 genes across 196,881 cells, derived from 2 batches and 32 pools. Droplet-type assignment and associated confidence scores for each cell were computed and reported in output_all_Pools_Asignment.txt for all the different softwares used. Highly confident singlets (167,026 cells) were selected for downstream analysis using an intersectional method as outlined in pipeline (results Final_all_Pools_Asignment.txt).
+Demultiplexing and doublet identification were conducted using multiple tools, including Demuxlet and Scrublet. The initial dataset comprised 33,694 genes across ~196K cells, derived from 2 batches and 32 pools. Droplet-type assignment and associated confidence scores for each cell were computed and reported in output_all_Pools_Asignment.txt for all the different softwares used. Highly confident singlets of ~167K cells were selected for downstream analysis using an intersectional method as outlined in pipeline (results Final_all_Pools_Asignment.txt). Detailed information on the pipeline and scripts is defined [here](https://wg1-pipeline-qc.readthedocs.io/en/latest/Demultiplexing/index.html#demultiplexing).
 
 
 **3) Cell Type Identification**
 Cell type identification was performed using two independent methods: Azimuth (reference-based method within the Seurat framework) and scPred. The results from both methods were merged and compared and are summarized in Comparison.zip.
-
+Detailed information on the pipeline and scripts is defined [here](https://powellgenomicslab.github.io/WG2-pipeline-classification-docs/).
 
 ### In house analysis 
 
@@ -250,3 +254,4 @@ For downatream analysis we removed any cells that was identified as ambigious or
 ```
 
 ```
+---
