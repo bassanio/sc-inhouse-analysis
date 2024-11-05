@@ -47,6 +47,9 @@ Demultiplexing and doublet identification were conducted using multiple tools, i
 Cell type identification was performed using two independent methods: Azimuth (reference-based method within the Seurat framework) and scPred. The results from both methods were merged and compared and are summarized in Comparison.zip.
 Detailed information on the pipeline and scripts is defined [here](https://powellgenomicslab.github.io/WG2-pipeline-classification-docs/).
 
+
+---
+
 ### In house analysis 
 
 The data was analysed independently using in-house pipeline to compare the unsupervised clutures  with reference based method adopted by consortium pipeline. Following bioinformatics method was utilized for the analysis of pooled 10x single cellsamples generated across multiple pools and multiple runs.
