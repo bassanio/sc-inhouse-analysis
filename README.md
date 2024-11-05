@@ -449,6 +449,10 @@ seurat_combined <- FindClusters(seurat_combined, resolution = 0.6)
 DimPlot(seurat_combined, reduction = "umap", group.by = "seurat_clusters")
 ```
 
+***HeatMap: vsT***
+
+![vst](plots/deseq2_Filtered_samples_vst_heatmap.png)
+
 ### Comparison between 2 pipelines
 
 To measure the similarity between two clusterings methods while accounting for chance and differences we ustilized python module `adjusted_rand_score` from the `sklearn.metrics`. 
