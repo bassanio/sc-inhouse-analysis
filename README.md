@@ -509,10 +509,13 @@ ari_score = adjusted_rand_score(harmony_clusters, filtered_clusters)
 print(f"Adjusted Rand Index: {ari_score}")
 ```
 
-We obtained the following score by comparing the culturing using inhouse method with predicted celltype level 2 of  **adjusted Rand Index:** `0.5844902789189855` 
+We obtained the following score by comparing the clusturing using inhouse method with predicted celltype level 2 of  **adjusted Rand Index:** `0.5844902789189855` 
 
-
+**Creating output**
+```
+contingency_table = pd.crosstab(harmony_clusters, filtered_clusters)
+contingency_table.to_excel("contingency_table.xlsx", sheet_name="Cluster Comparison")
+```
 
       
 
----
