@@ -449,9 +449,11 @@ seurat_combined <- FindClusters(seurat_combined, resolution = 0.6)
 DimPlot(seurat_combined, reduction = "umap", group.by = "seurat_clusters")
 ```
 
-***HeatMap: vsT***
+***Umap: Plpts***
 
-![vst](plots/deseq2_Filtered_samples_vst_heatmap.png)
+![Clusture](plots/UmapPlot_Clusture.png)
+![vst](plots/UmapPlot.png)
+![vst](plots/UmapPlotPoolID.png)
 
 ### Comparison between 2 pipelines
 
