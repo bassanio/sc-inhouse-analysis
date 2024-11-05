@@ -6,7 +6,7 @@ This repository conatins the information related to **The Impact of Ethnicity on
 1. [Data Repository](#data-information)
 2. [Consortium Analysi](#consortium-analysis)
 3. [In house analysis](#in-house-analysis)
-4. Comparison between Consortium and inhouse
+4. [Comparison between 2 pipelines](#comparison-between-2-pipelines)
 
 ---
 
@@ -49,7 +49,7 @@ Detailed information on the pipeline and scripts is defined [here](https://powel
 
 ### In house analysis 
 
-Following bioinformatics method was utilized for the analysis of pooled 10x single cellsamples generated across multiple pools and multiple runs.
+The data was analysed independently using in-house pipeline to compare the unsupervised clutures  with reference based method adopted by consortium pipeline. Following bioinformatics method was utilized for the analysis of pooled 10x single cellsamples generated across multiple pools and multiple runs.
 
 The analysis includes:
 
@@ -57,7 +57,7 @@ The analysis includes:
 1. Identification of the cells for each samples based on the genotypes
 2. Subsetting the highly probable cell and creating seurat object
 3. Filtering and Normalization of the subset
-4. umap
+4. Clusturing
 5. Cell type identification
    
 
@@ -233,25 +233,284 @@ For downatream analysis we removed any cells that was identified as ambigious or
 
 ## Step 2: Subsetting the highly probable cell and creating seurat object
 
-4. 
+**Per Sample Object**
 
+The below steps was repaeated for all the samples across all the pools and batches.
+
+```
+pool.data <- Read10X(data.dir ="MFHKDMXX/Pool001_cellrangerCount/outs/filtered_feature_bc_matrix/")
+pool<-NULL;
+pool<- CreateSeuratObject(counts = pool.data, project = "SC", min.cells = 3, min.features = 200)
+SAMBCPAM501<-read.table("..PAM501_BC.txt",header=FALSE)
+pool.vectorPAM501<-SAMBCPAM501[,"V1"]
+SAM_poolPAM501<-subset(pool,cell=pool.vectorPAM501)
+saveRDS (SAM_poolPAM501, file="PAM501.Rds")
+
+```
+
+**Creating Per pool Seurat object**
+
+The below steps was repaeated for all the samples across all the pools foreach batch .
+
+```
+CombinedPoolPool001 <- merge(SAM_poolPAM501, y=c(SAM_poolPAM522 ,SAM_poolPAM508 ,SAM_poolPAM511 ,SAM_poolPAM518 ,SAM_poolPAM539), add.cell.ids = c("B1-Pool001-PAM501" ,"B1-Pool001-PAM522" ,"B1-Pool001-PAM508" ,"B1-Pool001-PAM511" ,"B1-Pool001-PAM518" ,"B1-Pool001-PAM539"))
+saveRDS (CombinedPoolPool001, file="CombinedPoolPool001.Rds")
+
+```
+
+
+**Batch 1 Samples**
+
+All the pools were mereged  as a single batch
+
+```
+Pool1.1 <- readRDS("BATCH1/CombinedPoolPool001.Rds")
+Pool10.1  <- readRDS("BATCH1/CombinedPoolPool010.Rds")
+Pool11.1  <- readRDS("BATCH1/CombinedPoolPool011.Rds")
+Pool12.1  <- readRDS("BATCH1/CombinedPoolPool012.Rds")
+Pool13.1  <- readRDS("BATCH1/CombinedPoolPool013.Rds")
+Pool14.1  <- readRDS("BATCH1/CombinedPoolPool014.Rds")
+Pool15.1  <- readRDS("BATCH1/CombinedPoolPool015.Rds")
+Pool16.1  <- readRDS("BATCH1/CombinedPoolPool016.Rds")
+Pool2.1  <- readRDS("BATCH1/CombinedPoolPool002.Rds")
+Pool3.1  <- readRDS("BATCH1/CombinedPoolPool003.Rds")
+Pool4.1  <- readRDS("BATCH1/CombinedPoolPool004.Rds")
+Pool5.1  <- readRDS("BATCH1/CombinedPoolPool005.Rds")
+Pool6.1  <- readRDS("BATCH1/CombinedPoolPool006.Rds")
+Pool7.1  <- readRDS("BATCH1/CombinedPoolPool007.Rds")
+Pool8.1  <- readRDS("BATCH1/CombinedPoolPool008.Rds")
+Pool9.1  <- readRDS("BATCH1/CombinedPoolPool009.Rds")
+
+Pool1.1 @meta.data[,"PoolID"] <- "Pool1"
+Pool10.1 @meta.data[,"PoolID"] <- "Pool10"
+Pool11.1 @meta.data[,"PoolID"] <- "Pool11"
+Pool12.1 @meta.data[,"PoolID"] <- "Pool12"
+Pool13.1 @meta.data[,"PoolID"] <- "Pool13"
+Pool14.1 @meta.data[,"PoolID"] <- "Pool14"
+Pool15.1 @meta.data[,"PoolID"] <-  "Pool15"
+Pool16.1 @meta.data[,"PoolID"] <- "Pool16"
+Pool2.1 @meta.data[,"PoolID"] <- "Pool2"
+Pool3.1 @meta.data[,"PoolID"] <- "Pool3"
+Pool4.1 @meta.data[,"PoolID"] <- "Pool4"
+Pool5.1 @meta.data[,"PoolID"] <- "Pool5"
+Pool6.1 @meta.data[,"PoolID"] <- "Pool6"
+Pool7.1 @meta.data[,"PoolID"] <- "Pool7"
+Pool8.1 @meta.data[,"PoolID"] <-  "Pool8"
+Pool9.1 @meta.data[,"PoolID"] <- "Pool9"
+
+Pool1.2 <- readRDS("BATCH2/CombinedPoolPool1.Rds")
+Pool2.2 <- readRDS("BATCH2/CombinedPoolPool2.Rds")
+Pool3.2 <- readRDS("BATCH2/CombinedPoolPool3.Rds")
+Pool4.2 <- readRDS("BATCH2/CombinedPoolPool4.Rds")
+Pool5.2 <- readRDS("BATCH2/CombinedPoolPool5.Rds")
+Pool6.2 <- readRDS("BATCH2/CombinedPoolPool6.Rds")
+Pool7.2 <- readRDS("BATCH2/CombinedPoolPool7.Rds")
+Pool8.2 <- readRDS("BATCH2/CombinedPoolPool8.Rds")
+Pool9.2 <- readRDS("BATCH2/CombinedPoolPool9.Rds")
+Pool10.2 <- readRDS("BATCH2/CombinedPoolPool10.Rds")
+Pool11.2 <- readRDS("BATCH2/CombinedPoolPool11.Rds")
+Pool12.2 <- readRDS("BATCH2/CombinedPoolPool12.Rds")
+Pool13.2 <- readRDS("BATCH2/CombinedPoolPool13.Rds")
+Pool14.2 <- readRDS("BATCH2/CombinedPoolPool14.Rds")
+Pool15.2 <- readRDS("BATCH2/CombinedPoolPool15.Rds")
+Pool16.2 <- readRDS("BATCH2/CombinedPoolPool16.Rds")
+```
+
+**Batch 2 Samples**
+All the pools were mereged  as a single batch
+
+
+```
+Pool1.2@meta.data[,"PoolID"] <- "Pool1"
+Pool2.2@meta.data[,"PoolID"] <- "Pool2"
+Pool3.2@meta.data[,"PoolID"] <- "Pool3"
+Pool4.2@meta.data[,"PoolID"] <- "Pool4"
+Pool5.2@meta.data[,"PoolID"] <- "Pool5"
+Pool6.2@meta.data[,"PoolID"] <- "Pool6"
+Pool7.2@meta.data[,"PoolID"] <- "Pool7"
+Pool8.2@meta.data[,"PoolID"] <-  "Pool8"
+Pool9.2@meta.data[,"PoolID"] <- "Pool9"
+Pool10.2@meta.data[,"PoolID"] <- "Pool10"
+Pool11.2@meta.data[,"PoolID"] <- "Pool11"
+Pool12.2@meta.data[,"PoolID"] <- "Pool12"
+Pool13.2@meta.data[,"PoolID"] <- "Pool13"
+Pool14.2@meta.data[,"PoolID"] <- "Pool14"
+Pool15.2@meta.data[,"PoolID"] <-  "Pool15"
+Pool16.2@meta.data[,"PoolID"] <- "Pool16"
+
+```
+
+**Merging Batch 1 & Batch 2 Samples**
+
+Both the curated batches were merged as a single batch
+```
+pag.combined<- merge(Pool1.1, y=c(Pool2.1, Pool3.1, Pool4.1, Pool5.1,Pool6.1,Pool7.1,Pool8.1,Pool9.1,Pool10.1,Pool11.1,Pool12.1,Pool13.1,Pool14.1,Pool15.1,Pool16.1, Pool1.2, Pool2.2, Pool3.2, Pool4.2, Pool5.2,Pool6.2,Pool7.2,Pool8.2,Pool9.2,Pool10.2,Pool11.2,Pool12.2,Pool13.2,Pool14.2,Pool15.2,Pool16.2),project ="AllSamplesCombined")
+saveRDS (pag.combined, file="Batch1_2Samples.Rds")
+
+```
+
+## Step 3: Filtering and Normalization of the subset
+
+```
+seurat_object_subset <- readRDS("Batch1_2Samples.Rds")
+seurat_object_subset$Batch_Pool <- paste(seurat_object_subset$Batch, seurat_object_subset$PoolID, sep = "_")
+
+# QC thresholds
+nFeature_low <- 500;   nFeature_high <- 2500;   percent_mt_high <- 10;   nCount_high <- 20000
+
+
+# Pre-QC Plots
+pag.combined <- PercentageFeatureSet(seurat_object_subset, pattern = "^MT-", col.name = 'percent.mt', assay = "RNA")
+
+png("Raw_ViolinPlot.png", width = 2500, height = 2500, res = 300)
+VlnPlot(pag.combined, features = c("nFeature_RNA", "nCount_RNA", "percent.mt"), ncol = 3)
+dev.off()
+
+png("Raw_FeaturePlot.png", width = 2500, height = 2500, res = 300)
+FeatureScatter(pag.combined, feature1 = "nCount_RNA", feature2 = "percent.mt") +
+  FeatureScatter(pag.combined, feature1 = "nCount_RNA", feature2 = "nFeature_RNA")
+dev.off()
+
+pag.combined <- NULL
+
+# Step 1. Split Seurat object by Batch and Pool for normalization for the differenc in cells per sample and per pool
+combined_list <- SplitObject(seurat_object_subset, split.by = "Batch_Pool")
+
+```
+**Filtering**
+
+```
+
+# Add mitochondrial percentage and filter
+combined_list <- lapply(combined_list, function(x) {
+  x <- PercentageFeatureSet(x, pattern = "^MT-", col.name = 'percent.mt')
+  x <- subset(x, subset = nFeature_RNA > nFeature_low & nFeature_RNA < nFeature_high &
+                       nCount_RNA < nCount_high & percent.mt < percent_mt_high)
+  return(x)
+})
+```
+
+**Normalize with SCTransform**
+
+```
+# Step 2: Normalize with SCTransform and run PCA
+combined_list <- lapply(combined_list, function(x) {
+  x <- SCTransform(x, verbose = FALSE, vars.to.regress = c("percent.mt", "nFeature_RNA"), return.only.var.genes = FALSE)  # Normalize all genes
+  x <- RunPCA(x, verbose = FALSE)  # PCA
+  return(x)
+})
+
+# Step 2.5: Select integration features that exist across all objects
+features <- SelectIntegrationFeatures(object.list = combined_list, nfeatures = 2000)
+
+# Verify features are in scale.data for each object in combined_list
+validated_features <- features
+for (i in seq_along(combined_list)) {
+  available_features <- rownames(GetAssayData(combined_list[[i]], slot = "scale.data"))
+  validated_features <- intersect(validated_features, available_features)
+}
+
+```
    
-5. Subsetting the highly probable cell and creating seurat object
-6. Filtering and Normalization of the subset
-7. umap
-8. Cell type identification
-1. 
-  
-  
-  
-  
-      
-      ii: 
-      
-      iii: Sort the filtered vcf in the samorder as in the bam file using vcf-sort
-      
+## Step 4: Clusturing
+
+```
+# Step 3: Feature Selection & Integration
+combined_list <- PrepSCTIntegration(object.list = combined_list, anchor.features = validated_features)
+seurat_combined <- merge(combined_list[[1]], y = combined_list[-1])
+VariableFeatures(seurat_combined) <- validated_features
+# Set Default Assay and Run PCA
+DefaultAssay(seurat_combined) <- "SCT"
+seurat_combined <- RunPCA(seurat_combined, npcs = 50, verbose = FALSE)
+```
+
+**harmonize single-cell by correcting for batch effects and other variations**
+
+```
+seurat_combined <- RunHarmony(
+    object = seurat_combined, 
+    group.by.vars = "Batch_Pool",
+    assay.use = "SCT",
+    reduction.use = "pca",
+    dims = 1:30,
+    verbose = FALSE,
+    theta = 2
+)
+```
+**UMAP & Clusturing**
+
+```
+seurat_combined <- RunUMAP(seurat_combined, reduction = "harmony", dims = 1:30, min.dist = 0.5, n.neighbors = 50L)
+seurat_combined <- FindNeighbors(seurat_combined, reduction = "harmony", dims = 1:30)
+seurat_combined <- FindClusters(seurat_combined, resolution = 0.6)
+
+DimPlot(seurat_combined, reduction = "umap", group.by = "seurat_clusters")
+```
+
+### Comparison between 2 pipelines
+
+To measure the similarity between two clusterings methods while accounting for chance and differences we ustilized python module `adjusted_rand_score` from the `sklearn.metrics`. 
+
+**Reading the Seurat objects from 2 Methods**
+```
+# Step 1 Reading the Outputput from both the run
+seurat_combined <- readRDS("Harmony.Rds")
+Idents(seurat_combined) <- "seurat_clusters"
+
+## Reading filterd consortium
+Consortium<-readRDS("cons_data_filtered_125.RDS")
+Idents(Consortium) <- "predicted.celltype.l2"
+```
+**Fixing the cell names for comparison between 2 methods**
+
+```
+consortium_cells <- colnames(Consortium)
+consortium_metadata <- Consortium@meta.data
+
+consortium_new_cell_names <- paste0(
+  "B", consortium_metadata$scRNA_Batch,
+  "-Pool", sprintf("%03d", as.numeric(gsub("Pool", "", consortium_metadata$Pool))), # Force three-digit format
+  "-", consortium_metadata$Assignment, 
+  "_", sapply(strsplit(rownames(consortium_metadata), "_"), `[`, 1),
+  "-1"
+)
+Consortium <- RenameCells(Consortium, new.names = consortium_new_cell_names)
+```
+
+**Obtain common cells for comaprison**
+
+```
+common_cells <- intersect(colnames(seurat_combined), colnames(Consortium))
+harmony_clusters <- as.vector(Idents(seurat_combined)[common_cells])
+Consortium_clusters <- as.vector(Idents(Consortium)[common_cells])
+filtered_clusters <- tolower(Consortium_clusters)
+
+df <- data.frame(cell = common_cells, harmony_clusters, filtered_clusters)
+write.csv(df, "common_cluster_assignments.csv", row.names = FALSE)
 
 ```
 
+`24,988` common cells between the two Seurat objects (seurat_combined with `99,257 `cells and Consortium with `71,784` cells)
+
+**Running adjusted_rand_score**
+
+Following Python commands was run for the comparison
 ```
+import pandas as pd
+from sklearn.metrics import adjusted_rand_score
+df = pd.read_csv("common_cluster_assignments.csv")
+harmony_clusters = df['harmony_clusters']
+filtered_clusters = df['filtered_clusters']
+
+# Calculate Adjusted Rand Index
+ari_score = adjusted_rand_score(harmony_clusters, filtered_clusters)
+print(f"Adjusted Rand Index: {ari_score}")
+```
+
+We obtained the following score by comparing the culturing using inhouse method with predicted celltype level 2 of  **adjusted Rand Index:** `0.5844902789189855` 
+
+
+
+      
+
 ---
