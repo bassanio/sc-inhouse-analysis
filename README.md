@@ -534,6 +534,6 @@ We obtained the following score by comparing the clusturing using inhouse method
 contingency_table = pd.crosstab(harmony_clusters, filtered_clusters)
 contingency_table.to_excel("contingency_table.xlsx", sheet_name="Cluster Comparison")
 ```
-
+![Clusture Compare](plots/RandscoreComp.png)
       
 
