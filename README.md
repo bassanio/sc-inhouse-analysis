@@ -355,9 +355,6 @@ saveRDS (pag.combined, file="Batch1_2Samples.Rds")
 seurat_object_subset <- readRDS("Batch1_2Samples.Rds")
 seurat_object_subset$Batch_Pool <- paste(seurat_object_subset$Batch, seurat_object_subset$PoolID, sep = "_")
 
-# QC thresholds
-nFeature_low <- 500;   nFeature_high <- 2500;   percent_mt_high <- 10;   nCount_high <- 20000
-
 
 # Pre-QC Plots
 pag.combined <- PercentageFeatureSet(seurat_object_subset, pattern = "^MT-", col.name = 'percent.mt', assay = "RNA")
@@ -380,6 +377,8 @@ combined_list <- SplitObject(seurat_object_subset, split.by = "Batch_Pool")
 **Filtering**
 
 ```
+# QC thresholds
+nFeature_low <- 500;   nFeature_high <- 2500;   percent_mt_high <- 10;   nCount_high <- 20000
 
 # Add mitochondrial percentage and filter
 combined_list <- lapply(combined_list, function(x) {
