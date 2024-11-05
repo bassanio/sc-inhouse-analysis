@@ -4,7 +4,7 @@
 This repository conatins the information related to **The Impact of Ethnicity on the Single-cell Immune Response to Falciparum Malaria**.
 
 1. [Data Repository](#data-information)
-2. [Consortium Analysi](#consortium-analysis)
+2. [Consortium Analysis](#consortium-analysis)
 3. [In house analysis](#in-house-analysis)
 4. [Comparison between 2 pipelines](#comparison-between-2-pipelines)
 
