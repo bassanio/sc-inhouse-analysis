@@ -377,6 +377,10 @@ pag.combined <- NULL
 combined_list <- SplitObject(seurat_object_subset, split.by = "Batch_Pool")
 
 ```
+![Raw](plots/Raw_ViolinPlot.png)
+![RAW](plots/Raw_FeaturePlot.png)
+
+
 **Filtering**
 
 ```
@@ -391,6 +395,10 @@ combined_list <- lapply(combined_list, function(x) {
   return(x)
 })
 ```
+
+![Filtered](plots/Filtered_ViolinPlot.png)
+![Filtered](plots/Filtered_FeaturePlot.png)
+
 
 **Normalize with SCTransform**
 
@@ -449,11 +457,9 @@ seurat_combined <- FindClusters(seurat_combined, resolution = 0.6)
 DimPlot(seurat_combined, reduction = "umap", group.by = "seurat_clusters")
 ```
 
-***Umap: Plpts***
-
 ![Clusture](plots/UmapPlot_Clusture.png)
-![vst](plots/UmapPlot.png)
-![vst](plots/UmapPlotPoolID.png)
+![Clusture](plots/UmapPlot.png)
+![Clusture](plots/UmapPlotPoolID.png)
 
 ### Comparison between 2 pipelines
 
