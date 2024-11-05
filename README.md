@@ -92,7 +92,7 @@ For downatream analysis we removed any cells that was identified as ambigious or
 <summary>Summary table after demuxlet</summary>
 
 
-|Sample_ID |scRNA_Batch |scRNA_Pool | Total_Droplets| Droplets_assigned_To_Singlesample| %Singletons_retrived|Singletons |
+|Sample_ID |scRNA_Batch |scRNA_Pool | Total_Droplets| Droplets_assigned_To_Singlesample| %Singletons_retrived|Doublets |
 |:---------|:-----------|:----------|--------------:|-------------------------------------:|-------------------------:|:-------------|
 |PAM501    |BATCH1      |Pool1      |           6403|                                  5892|                  92.01937|1451          |
 |PAM508    |BATCH1      |Pool1      |           6403|                                  5892|                  92.01937|917           |
