@@ -3,10 +3,11 @@
 
 This repository conatins the information related to **The Impact of Ethnicity on the Single-cell Immune Response to Falciparum Malaria**.
 
-1. [Data Repository](#data-information)
-2. [Consortium Analysis](#consortium-analysis)
-3. [In house analysis](#in-house-analysis)
-4. [Comparison between 2 pipelines](#comparison-between-2-pipelines)
+1. [Data repository](#data-information)
+2. [Consortium analysis](#consortium-analysis)
+3. [eQTL analysis](#eqtl-analysis)
+4. [In house analysis](#in-house-analysis)
+5. [Comparison between 2 pipelines](#comparison-between-2-pipelines)
 
 ---
 
@@ -53,6 +54,12 @@ Cell type identification was performed using two independent methods: Azimuth (r
 ![Comapare](plots/comparison_heatmap_counts.png)
 
 
+
+---
+
+### eQTL analysis
+
+Pesuod bulk was created using the muscate tool (Muscat-DGEA.R)
 
 ---
 
