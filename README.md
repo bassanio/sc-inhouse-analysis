@@ -6,7 +6,7 @@ This repository conatins the information related to **The Impact of Ethnicity on
 1. [Data repository](#data-information)
 2. [Consortium analysis](#consortium-analysis)
 3. [eQTL analysis](#eqtl-analysis)
-4. [In house analysis](#in-house-analysis)
+4. [In house analysis](#independent-unsupervised-clustering)
 5. [Comparison between 2 pipelines](#comparison-between-2-pipelines)
 
 ---
@@ -63,8 +63,41 @@ Pesuod bulk was created using the muscate tool (Muscat-DGEA.R)
 
 ---
 
-### In house analysis 
+### Independent unsupervised clustering 
 
+The  Demultiplexed and Doublet removed singlecell data was used to perform unsupervised clustering (Louvain method) to identify cell clusters de novo and compare the cells to the Reference based method. We empolyed simmilar QC filtering in both the methods. 
+
+
+![Raw](plots/Raw_ViolinPlot.png)
+![RAW](plots/Raw_FeaturePlot.png)
+
+
+
+
+![Filtered](plots/Filtered_ViolinPlot.png)
+![Filtered](plots/Filtered_FeaturePlot.png)
+
+![Clusture UMAP](plots/UmapPlot_Clusture_Filtered0.7.png)
+![Clusture Celltype1](plots/UmapPlot_predicted.celltype.l1_Filtered0.7.png)
+![Clusture Celltype2](plots/UmapPlot_predicted.celltype.l2_Filtered0.7.png)
+![Clusture Ethnicity](plots/UmapPlot_Ethnicity_Filtered0.7.png)
+
+To measure the similarity between two clusterings methods while accounting for chance and differences we ustilized python module `adjusted_rand_score` from the `sklearn.metrics`. 
+
+The script `Harmony.R`  contains the method used for independent clusterings analysis
+
+
+
+
+
+
+
+
+
+
+
+
+###################
 The data was analysed independently using in-house pipeline to compare the unsupervised clusturing  with reference based method adopted by consortium pipeline. Following bioinformatics method was utilized for the analysis of pooled 10x single cell samples generated across multiple pools and multiple runs.
 
 The analysis includes:
