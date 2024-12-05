@@ -89,7 +89,47 @@ The  Demultiplexed and Doublet removed singlecell data was used to perform unsup
 
 ### Comparison between 2 pipelines
 
-To measure the similarity between two clusterings methods while accounting for chance and differences we ustilized python module `adjusted_rand_score` from the `sklearn.metrics`. We obtained randscore of `0.834068931703432` while comparing Level2 annotation of louvain method clusturing with reference based method and `0.6690088808363425` randscore seurat clustures numbers with reference based method
+
+Summary table based on cell type prediction  between reference based method and Louvain
+
+| Level2 Annotation     | #Cells Reference Based | #Cells Louvain Filtered 0.7 |
+|------------------------|------------------------|-----------------------------|
+| B intermediate         | 5744                  | 5532                        |
+| B memory               | 1955                  | 1990                        |
+| B naive                | 5571                  | 5668                        |
+| CD4 CTL                | 68                    | 79                          |
+| CD4 Naive              | 9153                  | 10243                       |
+| CD4 Proliferating      | 4                     |                             |
+| CD4 TCM                | 11791                 | 9824                        |
+| CD4 TEM                | 779                   | 766                         |
+| CD8 Naive              | 4741                  | 4356                        |
+| CD8 TCM                | 33                    | 46                          |
+| CD8 TEM                | 6444                  | 6304                        |
+| CD14 Mono              | 5367                  | 7065                        |
+| CD16 Mono              | 5034                  | 4893                        |
+| cDC1                   | 2                     | 2                           |
+| cDC2                   | 130                   | 127                         |
+| dnT                    | 100                   | 95                          |
+| Doublet                | 5                     | 10                          |
+| Eryth                  | 6                     |                             |
+| gdT                    | 1565                  | 1548                        |
+| HSPC                   | 5                     |                             |
+| ILC                    | 23                    | 20                          |
+| MAIT                   | 484                   | 466                         |
+| NK                     | 4660                  | 4690                        |
+| NK Proliferating       | 9                     | 2                           |
+| NK_CD56bright          | 296                   | 263                         |
+| pDC                    | 293                   | 286                         |
+| Plasmablast            | 84                    | 78                          |
+| Platelet               | 138                   | 133                         |
+| Treg                   | 438                   | 435                         |
+
+
+
+To measure the similarity between two clusterings methods while accounting for chance and differences we ustilized python module `adjusted_rand_score` from the `sklearn.metrics`. 
+
+
+We obtained randscore of `0.834068931703432` while comparing Level2 annotation of louvain method clusturing with reference based method and `0.6690088808363425` randscore seurat clustures numbers with reference based method
 
 
 **Find common cells between the 2 methods (Seurat Level 2 annotation)**
@@ -153,3 +193,7 @@ print("Clusture Level", ari_score)
 ```
 
 `Clusture Level: 0.6690088808363425` 
+
+
+
+
